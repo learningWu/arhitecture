@@ -1,1 +1,1 @@
-## 参考 https://github.com/shenzhen2017/android-architecture
+## 参考 [Android架构更佳实践](https://github.com/shenzhen2017/android-architecture)
