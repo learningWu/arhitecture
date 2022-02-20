@@ -2,6 +2,7 @@ package com.zj.architecture.mockapi
 
 import com.zj.architecture.BuildConfig
 import okhttp3.*
+import kotlin.random.Random
 
 class MockInterceptor : Interceptor {
 
@@ -9,7 +10,7 @@ class MockInterceptor : Interceptor {
         if (BuildConfig.DEBUG) {
             val uri = chain.request().url().uri().toString()
             val responseString = when {
-                uri.endsWith("mock") -> getMockApiResponse
+                uri.endsWith("mock") -> getMockApiResponse()
                 else -> ""
             }
 
@@ -33,16 +34,16 @@ class MockInterceptor : Interceptor {
     }
 }
 
-const val getMockApiResponse = """
+fun getMockApiResponse() = """
 {
   "articles": [
     {
-      "title": "Title",
+      "title": "Title${Random(System.currentTimeMillis()).nextInt(10)}",
       "description": "Description",
       "imageUrl": "imageUrl"
     },
     {
-      "title": "Title",
+      "title": "Title${Random(System.currentTimeMillis()).nextInt(10)}",
       "description": "Description",
       "imageUrl": "imageUrl"
     }
