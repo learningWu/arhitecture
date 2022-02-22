@@ -41,6 +41,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun initViewModel() {
         viewModel.viewStates.run {
+            // 这里是局部监听 列表数据改变
             observeState(this@MainActivity, MainViewState::newsList) {
                 newsRvAdapter.submitList(it)
             }

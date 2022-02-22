@@ -17,7 +17,15 @@ import kotlinx.coroutines.launch
 class MainViewModel : ViewModel() {
     private var count: Int = 0
     private val repository: NewsRepository = NewsRepository.getInstance()
+
+    /**
+     * 私有的 MutableLiveData 修改数据
+     */
     private val _viewStates: MutableLiveData<MainViewState> = MutableLiveData(MainViewState())
+
+    /**
+     * 公有的 LiveData 暴露数据监听
+     */
     val viewStates = _viewStates.asLiveData()
     private val _viewEvents: SingleLiveEvent<MainViewEvent> = SingleLiveEvent() //一次性的事件，与页面状态分开管理
     val viewEvents = _viewEvents.asLiveData()
@@ -42,6 +50,8 @@ class MainViewModel : ViewModel() {
 
     private fun fetchNews() {
         _viewStates.setState {
+            // 因为对象内部变量都是val不可变的，所以使用copy这种方式进行状态更新。
+            // 正在刷新
             copy(fetchStatus = FetchStatus.Fetching)
         }
         viewModelScope.launch {
