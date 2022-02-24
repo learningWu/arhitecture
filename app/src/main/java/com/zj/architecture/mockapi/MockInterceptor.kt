@@ -38,12 +38,12 @@ fun getMockApiResponse() = """
 {
   "articles": [
     {
-      "title": "Title${Random(System.currentTimeMillis()).nextInt(10)}",
+      "title": "Title${System.currentTimeMillis()}",
       "description": "Description",
       "imageUrl": "imageUrl"
     },
     {
-      "title": "Title${Random(System.currentTimeMillis()).nextInt(10)}",
+      "title": "Title${System.currentTimeMillis()}",
       "description": "Description",
       "imageUrl": "imageUrl"
     }
